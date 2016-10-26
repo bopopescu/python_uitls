@@ -7,7 +7,8 @@ import numpy as np
 from wordcloud import WordCloud, STOPWORDS
 
 d = path.dirname(__file__)
-text = open(path.join(d, 'alice.txt')).read()
+text = open(path.join(d, 'word_1.txt')).read()
+
 alice_mask = np.array(Image.open(path.join(d, "alice_color.png")))
 
 stopwords = set(STOPWORDS)
@@ -16,7 +17,7 @@ stopwords.add("said")
 wc = WordCloud(background_color="white", max_words=2000, mask=alice_mask,
                stopwords=stopwords)
 wc.generate(text)
-wc.to_file(path.join(d, "alice1112.png"))
+wc.to_file(path.join(d, "zh1.png"))
 
 
 
