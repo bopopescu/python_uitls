@@ -2,19 +2,20 @@
 # -*- coding: utf-8 -*-'
 
 import matplotlib
-from matplotlib.dates import datestr2num
 from matplotlib.font_manager import FontProperties
-
 matplotlib.use('TkAgg')
-import tushare as ts
-import matplotlib.pyplot as plt
-
 myfont = FontProperties(fname='/Library/Fonts/huawenfangsong.ttf')
 matplotlib.rcParams['axes.unicode_minus']=False
 
 
+import matplotlib.pyplot as plt
+
+
+
+
 
 def main():
+    import tushare as ts
     data = ts.get_hist_data('sz50', start='2016-11-01', end='2016-12-30')
     data = data.sort_index()
 
@@ -69,6 +70,7 @@ def main():
 
 
     plt.show()
+    plt.savefig('test2.jpg')
 
 if __name__ == '__main__':
     main()
