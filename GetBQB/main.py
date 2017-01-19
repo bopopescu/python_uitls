@@ -26,7 +26,7 @@ def getbqb(img_url , imagename , index):
             for chunk in r.iter_content(chunk_size=1024):
                 f.write(chunk)
     except Exception :
-        print('index: ' + index + 'img_url: ' + img_url + 'is bad url')
+        print('index:  ' + index + '   img_url: ' + img_url + '  is bad url')
 
 def anasrc(alltext , index):
   #  print('in anasrc')
@@ -69,7 +69,7 @@ def anasrc(alltext , index):
     #print('out anasrc')
 
 def main():
-    index = 320
+    index = 1315
     #max 5866
     while index < 5866:
         print('当前是第  ' + str(index) + '  页')
