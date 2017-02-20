@@ -5,49 +5,49 @@ def main():
     from email.mime.multipart import MIMEMultipart
     from email.mime.image import MIMEImage
 
-    mail_host = 'smtp.163.com'
-    mail_user = 'm1***'
-    mail_pass = '******'
-    sender = 'm1***@163.com'
-    receivers = ['***@qq.com']
+    mail_host = 'smtp.163.com'      #smtpw地址
+    mail_user = 'm1xxx'      #邮箱登录名
+    mail_pass = 'xxx'      #授权码
+    sender = 'm1xxx@163.com' #发件邮箱地址
+    receivers = ['xxx@xxx.net'] #收件邮箱地址
 
 
     #只发送文本的时候
-    # message = MIMEText('conten1111t', 'plain', 'utf-8')
-    # message['Subject'] = 'title'
-    # message['From'] = sender
-    # message['To'] = receivers[0]
+    message = MIMEText('111', 'plain', 'utf-8')
+    message['Subject'] = 'title'
+    message['From'] = sender
+    message['To'] = receivers[0]
 
 
     #需要发送附件的时候
-    message = MIMEMultipart()
-    message['From'] = sender
-    message['To'] = receivers[0]
-    message['Subject'] = 'title'
+    # message = MIMEMultipart()
+    # message['From'] = sender
+    # message['To'] = receivers[0]
+    # message['Subject'] = 'title'
 
     #通过html修饰文本格式
     # with open('abc.html', 'r') as f:
     #     content = f.read()
     # html = MIMEText(content, 'html', 'utf-8')
 
-    with open('abc.txt', 'r')as h:
-        content2 = h.read()
-    file = MIMEText(content2, 'plain', 'utf-8')
-    file['Content-Type'] = 'application/octet-stream'
-    file['Content-Disposition'] = 'attachment;filename="abc.txt"'
+    # with open('abc.txt', 'r')as h:
+    #     content2 = h.read()
+    # file = MIMEText(content2, 'plain', 'utf-8')
+    # file['Content-Type'] = 'application/octet-stream'
+    # file['Content-Disposition'] = 'attachment;filename="abc.txt"'
 
 
     #图片附件
-    with open('1.png', 'rb')as fp:
-        picture = MIMEImage(fp.read())
-        picture['Content-Type'] = 'application/octet-stream'
-        picture['Content-Disposition'] = 'attachment;filename="1.png"'
+    # with open('1.png', 'rb')as fp:
+    #     picture = MIMEImage(fp.read())
+    #     picture['Content-Type'] = 'application/octet-stream'
+    #     picture['Content-Disposition'] = 'attachment;filename="1.png"'
 
 
     # 将内容附加到邮件主体中
     # message.attach(html)
-    message.attach(file)
-    message.attach(picture)
+    # message.attach(file)
+    # message.attach(picture)
 
 
 
