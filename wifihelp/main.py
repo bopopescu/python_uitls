@@ -79,6 +79,8 @@ def getwifiBase(url):
     except :
         print("getwifiBase error")
 
+        
+
 
 
 
