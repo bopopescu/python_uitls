@@ -50,4 +50,5 @@ for pm in pmList:
         _pmList.append(_pm)
 
 for pm in _pmList:
-    print(pm)
+    from detailed import  find
+    find(pm)
