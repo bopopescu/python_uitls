@@ -1,26 +1,27 @@
-
-
-import tornado as tornado
-import tornado.web
 import tornado.ioloop
+import tornado.web
+
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello, world")
+
+def make_app():
+    return tornado.web.Application([
+        (r"/", MainHandler),
+    ])
 
 
-
-class Main():
-    def get(self, *args, **kwargs):
-        print "test"
-
-
-application = tornado.web.Application([
-    (r"/" , Main ),
+class GetDate(object):
+    from GetDate import getWeaterDate
+    getWeaterDate()
 
 
-])
-
-def runServer():
+if __name__ == "__main__":
+    app = make_app()
     port = 9001
-    application.listen(port)
-    tornado.ioloop.IOLoop.instance().start()
-    print "Server is Running in localhost" + port
+    app.listen(port)
+    print 'Server is running in localhost:' + str(port)
+    # tornado.ioloop.IOLoop.current().start()
 
-runServer()
+    GetDate()
+
