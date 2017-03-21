@@ -84,9 +84,9 @@ def getWeaterDateInHouer():
     html = html.replace('\t', '')
     html = html.replace('\r', '')
     #print html
-
+sdasd
     _hourList = re.findall('<dl>.*?</dl>' , html)
-    #print _hourList[0]
+    #pdsdaarint _hourList[0]
 
     _weather = re.findall('</dd><dd>.*?</dd>' , _hourList[0])
     _weather = _weather[0]

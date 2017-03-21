@@ -9,10 +9,10 @@ def send(ip):
 
 
     mail_host = 'smtp.163.com'      #smtpw地址
-    mail_user = ''      #邮箱登录名
-    mail_pass = ''      #授权码
-    sender = '' #发件邮箱地址
-    receivers = [''] #收件邮箱地址
+    mail_user = 'm15941104617'      #邮箱登录名
+    mail_pass = 'd221628'      #授权码
+    sender = 'm15941104617@163.com' #发件邮箱地址
+    receivers = ['xinxi@gengzhibo.com'] #收件邮箱地址
 
 
     #只发送文本的时候
