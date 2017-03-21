@@ -4,25 +4,46 @@ from time import sleep
 
 import requests
 
-def getbqb(img_url , imagename , index):
-    index = (int) (index / 10)
-    index = 'bqb/bqb' + str(index)
+# def getbqb(img_url , imagename , index):
+#     index = (int) (index / 10)
+#     index = 'bqb/bqb' + str(index)
+#
+#
+#
+#     basepath = str(index) + '/'
+#     img_name = basepath + imagename
+#
+#     try:
+#         r = requests.get(img_url)
+#         with open(img_name, 'wb') as f:
+#             for chunk in r.iter_content(chunk_size=1024):
+#                 f.write(chunk)
+#     except Exception :
+#         print('index:  ' + index + '   img_url: ' + img_url + '  is bad url')
+
+
+def saveimage(parentname, relimage):
+    parentname = 'image/' + parentname
+
+    filename = re.findall('/.*?\..*' , relimage)
+    filename = filename[0]
+    filename = filename.split('/')
+    filename = filename[len(filename) - 1]
+
+    filename = parentname + '/' + filename
 
     try:
-        os.mkdir(index)
+        os.mkdir(parentname)
     except Exception :
         pass
 
-    basepath = str(index) + '/'
-    img_name = basepath + imagename
-
     try:
-        r = requests.get(img_url)
-        with open(img_name, 'wb') as f:
+        r = requests.get(relimage)
+        with open(filename, 'wb') as f:
             for chunk in r.iter_content(chunk_size=1024):
                 f.write(chunk)
     except Exception :
-        print('index:  ' + index + '   img_url: ' + img_url + '  is bad url')
+        print(relimage + '   error')
 
 
 def checkparentname(html):
@@ -39,7 +60,7 @@ def checkparentname(html):
 
 
 def genImagepager(name , url):
-    print(name, url)
+    # print(name, url)
     parentname = '未分类'
     if '福利' in name:
         parentname = '福利'
@@ -48,20 +69,24 @@ def genImagepager(name , url):
     elif '手机' in name:
         parentname = '手机'
 
-
-
     reponse = requests.get(url)
     reponse.encoding = 'utf-8'
     html = reponse.text
 
     parentname = checkparentname(html)
 
+    print(name , parentname, url)
+
     # print(html)
 
     imagetList = re.findall('http://www.gamersky.com/showimage/id_gamersky.shtml\?http.*?"' , html)
     for image in imagetList:
-        print(image)
+        relimage = re.findall('http://img.*"' , image)
+        relimage = relimage[0]
+        relimage = relimage[:len(relimage) - 1]
+        print(relimage)
 
+        saveimage(parentname , relimage)
 
 
 
@@ -88,7 +113,7 @@ def getImagePageconter(name , url):
 def main():
     webbase = 'http://db2.gamersky.com/LabelJsonpAjax.aspx?jsondata={%22type%22:%22updatenodelabel%22,%22isCache%22:true,%22cacheTime%22:60,%22nodeId%22:%2220117%22,%22isNodeId%22:%22true%22,%22page%22:'
     index = 0
-    # while index < 22:
+    # while index < 1:
     while index < 22:
         index = index + 1
         _webbase = webbase + str(index) + '}'
@@ -120,5 +145,5 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    getImagePageconter('每周壁纸精选：形容美丽有三宝 颜好、腰软、身材棒' , 'http://www.gamersky.com/ent/201703/881616.shtml')
+    main()
+    # getImagePageconter('每周壁纸精选：形容美丽有三宝 颜好、腰软、身材棒' , 'http://www.gamersky.com/ent/201703/881616.shtml')
