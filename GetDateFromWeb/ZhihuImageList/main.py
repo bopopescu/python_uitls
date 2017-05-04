@@ -16,7 +16,7 @@ def findIsEnd(html):
 
 def saveimage(imagesrc, relimage):
     parentname = imagesrc
-    parentname = re.findall('com/.*?_r\.(?:jpg|png)' , parentname)
+    parentname = re.findall('com/.*?_r\.(?:jpg|png|jpeg)' , parentname)
     parentname = parentname[0]
     parentname = parentname.replace('com/' , '')
     parentname = parentname.replace('_r', '')
@@ -28,7 +28,7 @@ def saveimage(imagesrc, relimage):
     pd = os.path.isfile(filename)
 
     if pd:
-        print(relimage + 'is create')
+        print(imagesrc + 'is create')
     else:
         try:
             r = requests.get(imagesrc)
@@ -80,7 +80,7 @@ def main(questionid ):
         reponse = requests.get(url , headers=headers)
         html = reponse.text
 
-        # print(html)
+        print(html)
 
         alljson = json.loads(html)
         # print(alljson['data'])
@@ -113,7 +113,7 @@ def main(questionid ):
 
 
 
-main(46312145 )
+main(59214151)
 
 
 
