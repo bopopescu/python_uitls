@@ -20,6 +20,7 @@ def saveimage(imagesrc, relimage):
     parentname = parentname[0]
     parentname = parentname.replace('com/' , '')
     parentname = parentname.replace('_r', '')
+    parentname = parentname.replace('v2-', '')
 
     filename = 'image/' + relimage + '/' + parentname
 
@@ -43,8 +44,9 @@ def createFile(filename):
     filename = 'image/' + filename
     try:
         os.mkdir(filename)
+        print(filename + '创建成功')
     except Exception :
-        print('文件夹创建失败')
+        print( filename + '文件夹创建失败')
 
 
 
@@ -113,7 +115,7 @@ def main(questionid ):
 
 
 
-main(59214151)
+main(36486450)
 
 
 
