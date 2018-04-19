@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import os
 import re
 from time import sleep
@@ -5,12 +7,13 @@ from time import sleep
 import requests
 
 
-webbase = 'http://www.ubiaoqing.com/hot/'
+webbase = 'http://www.youbiaoqing.com/hot/'
 
 
 def getbqb(img_url , imagename , index):
-    index = (int) (index / 10)
-    index = 'bqb/bqb' + str(index)
+    # index = (int) (index / 10)
+    # index = 'bqb/bqb' + str(index)
+    index = 'bqb/bqb'
 
     try:
         os.mkdir(index)
@@ -29,53 +32,51 @@ def getbqb(img_url , imagename , index):
         print('index:  ' + index + '   img_url: ' + img_url + '  is bad url')
 
 def anasrc(alltext , index):
+    alltext = alltext.replace('\t' , '')
+    alltext = alltext.replace('\r' , '')
+    alltext = alltext.replace('\n' , '')
+    alltext = alltext.replace(' ' , '')
+    print alltext
   #  print('in anasrc')
-    regu = '<img.*>'
+    regu = 'blank"><img.*?>'
 
     imagelist = re.findall(regu , alltext ,  re.I)
+
+    # imageurl = imageurl[0]
     for image in imagelist:
-        src = ''
-        text = ''
-        reg = 'http://ubq.*jpg\"'
-        srcL = re.findall(reg , image , re.I)
-        for sr in srcL:
-            src = sr[:len(sr) - 1]
-        reg = 'alt=\".*\" '
-        textL = re.findall(reg , image , re.I)
-        for te in textL:
-            text = te[5:len(te) - 2]
-            text = text + '.jpg'
-
-        if(len(src) > 10):
-            getbqb(src , text , index)
+        imageurl = re.findall('http://img.*?\.jpg', image)
+        try:
+            imageurl = imageurl[0]
+            # print 'imageurl: ' + imageurl
+            name = re.findall('alt=".*?"' , image )
+            name = name[0]
+            name = name.replace('alt="' , '')
+            name = name.replace('"' , '')
+            name = name.replace(' ' , '')
+            name = name + '.jpg'
 
 
-    for image in imagelist:
-        src = ''
-        text = ''
-        reg = 'http://ubq.*gif\"'
-        srcL = re.findall(reg , image , re.I)
-        for sr in srcL:
-            src = sr[:len(sr) - 1]
-       # print(src)
-        reg = 'alt=\".*\" '
-        textL = re.findall(reg , image , re.I)
-        for te in textL:
-            text = te[5:len(te) - 2]
-            text = text + '.gif'
-        if (len(src) > 10):
-            getbqb(src, text , index)
+            if (u'可爱' in name or  u'萌' in name) and u'tf' not in name:
+                print name
+                getbqb(imageurl , name , index)
+        except Exception:
+            pass
 
     #print('out anasrc')
 
+
+
 def main():
-    index = 1315
+    index = 0
     #max 5866
-    while index < 5866:
-        print('当前是第  ' + str(index) + '  页')
+    # while index < 2:
+    while True:
+        print('is  ' + str(index) + '  page')
         index = index + 1
         weburl = webbase + str(index)
+        print weburl
         r = requests.get(weburl)
+        # print r.text
         anasrc(r.text , index)
        # sleep(5)
 
